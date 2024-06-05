@@ -11,10 +11,13 @@ use ex::println;
 pub extern "C" fn _start() -> ! {
     println!("Hello World{}", "!");
     
-    ex::init(); // new
+    ex::init();
 
-    // invoke a breakpoint exception
-    x86_64::instructions::interrupts::int3(); // new
+    fn stackoverflow(){
+        stackoverflow();
+    }
+
+    stackoverflow();
 
     #[cfg(test)]
     test_main();

@@ -7,7 +7,8 @@ use core::panic::PanicInfo;
 
 /// 这个函数将在panic时被调用
 #[panic_handler]
-fn panic(_info: &PanicInfo) -> ! {
+fn panic(info: &PanicInfo) -> ! {
+    println!("{}", info);
     loop {}
 }
 
@@ -25,7 +26,13 @@ pub extern "C" fn _start() -> ! {
     //     }
     // }
 
-    vga_buffer::print_something();
+    // vga_buffer::print_something();
+    // use core::fmt::Write;
+    // vga_buffer::WRITER.lock().write_str("Hello again").unwrap();
+    // write!(vga_buffer::WRITER.lock(), ", some numbers: {} {}", 42, 1.337).unwrap();
+
+    println!("Hello World{}", "!");
+    panic!("Some panic message");
     // 无限循环
     loop {}
 }

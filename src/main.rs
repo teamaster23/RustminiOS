@@ -35,7 +35,7 @@ fn trivial_assertion() {
     serial_println!("[ok]");
 }
 
-static HELLO: &[u8] = b"Hello World!";
+// static HELLO: &[u8] = b"Hello World!";
 
 #[no_mangle] // 禁用函数名重整
 pub extern "C" fn _start() -> ! {

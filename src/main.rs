@@ -5,6 +5,7 @@
 #![reexport_test_harness_main = "test_main"]
 
 mod vga_buffer;
+mod serial;
 
 use core::panic::PanicInfo;
 
@@ -18,12 +19,20 @@ fn panic(info: &PanicInfo) -> ! {
 // 保证只在测试中出现
 #[cfg(test)]
 fn test_runner(tests: &[&dyn Fn()]) {
+    serial_println!("Running {} tests", tests.len());
     println!("Running {} tests", tests.len());
     for test in tests {
         test();
     }
     // new
     exit_qemu(QemuExitCode::Success);
+}
+
+#[test_case]
+fn trivial_assertion() {
+    serial_print!("trivial assertion... ");
+    assert_eq!(1, 1);
+    serial_println!("[ok]");
 }
 
 static HELLO: &[u8] = b"Hello World!";
@@ -61,3 +70,6 @@ pub fn exit_qemu(exit_code: QemuExitCode) {
         port.write(exit_code as u32);
     }
 }
+
+
+

@@ -1,5 +1,5 @@
 use crate::{print, println};
-use crate::menu::{calculator_over,findaddress_over,menu_begin, menu_welcome,txt_test_over};
+use crate::menu::{menu_ps,calculator_over,findaddress_over,menu_begin, menu_welcome,txt_test_over};
 
 use alloc::string::ToString;
 use conquer_once::spin::OnceCell;
@@ -98,6 +98,7 @@ pub async fn print_keypresses() {
     );
 
     menu_begin();
+    menu_ps();
 
     let mut cnt=0;
     let mut op1=0;
@@ -165,6 +166,7 @@ pub async fn print_keypresses() {
                             }
 
                             if cnt==9 {
+                                println!("");
                                 unsafe {
                                     *(s as *mut u64) = 42;
                                 }
